@@ -5,7 +5,47 @@
   <title>我的觉察工具</title>
 </head>
 <body>
-  <h1>欢迎来到我的觉察工具</h1>
-  <p>用户提交表单后，AI分析结果会显示在这里。</p >
+  <h1>觉察工具</h1>
+  <form id="awarenessForm">
+    <label>事件：</label><br>
+    <input type="text" name="event"><br><br>
+    
+    <label>情绪：</label><br>
+    <input type="text" name="emotion"><br><br>
+    
+    <label>想法：</label><br>
+    <input type="text" name="thought"><br><br>
+    
+    <label>身体感受：</label><br>
+    <input type="text" name="body"><br><br>
+    
+    <label>思维陷阱：</label><br>
+    <select name="trap" multiple>
+      <option>非黑即白</option>
+      <option>以偏概全</option>
+      <option>消极过度</option>
+      <option>妄下结论</option>
+      <option>灾难化</option>
+      <option>“应该”句式</option>
+      <option>个人化</option>
+    </select><br><br>
+    
+    <button type="button" onclick="submitForm()">提交</button>
+  </form>
+  <div id="result"></div>
+
+  <script>
+    function submitForm() {
+      const form = document.getElementById('awarenessForm');
+      const data = {
+        event: form.event.value,
+        emotion: form.emotion.value,
+        thought: form.thought.value,
+        body: form.body.value,
+        trap: Array.from(form.trap.selectedOptions).map(opt => opt.value)
+      };
+      document.getElementById('result').innerText = JSON.stringify(data, null, 2);
+    }
+  </script>
 </body>
 </html>
